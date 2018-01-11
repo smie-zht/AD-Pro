@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:weightSum="1">
+    <LinearLayout
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:id="@+id/year"
+        android:layout_marginTop="5dp">
+        <ImageView
+            android:layout_width="20dp"
+            android:background="@drawable/back"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="0dp"
+            android:textColor="@color/black"
+            android:text="返回"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:textColor="@color/black"
+        android:gravity="center_horizontal"
+        android:text="本APP适用于图书查询，切勿用于不正当途径"/>
+    <TextView
+        android:id="@+id/text232"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+
+        android:layout_gravity="center"
+        android:layout_marginBottom="2dp"
+        android:text="开发商为中大学子"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_weight="0.04" />
+
+</LinearLayout>

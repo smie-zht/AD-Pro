@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="#B01c171b"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="书友圈"
+            android:layout_gravity="center"
+            android:layout_marginTop="4dp"
+            android:layout_height="25dp"
+            android:textSize="18dp"
+            android:textColor="@color/white"
+            />
+        <ImageView
+            android:layout_width="24dp"
+            android:id="@+id/add"
+            android:layout_marginTop="10dp"
+            android:layout_height="22dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="end"
+            android:background="@drawable/cam"/>
+    </FrameLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

@@ -89,21 +89,18 @@ public class MainActivity extends FragmentActivity {
                 isLogin = true; //已登录
             }
         }
-
         //normal状态下的图片
         normals = new HashMap<>();
         normals.put(R.id.home,R.drawable.home);
         normals.put(R.id.user,R.drawable.user);
         normals.put(R.id.community,R.drawable.users);
         normals.put(R.id.api,R.drawable.douban);
-
         //选中状态下的图片
         selects = new HashMap<>();
         selects.put(R.id.home,R.drawable.s_home);
         selects.put(R.id.user,R.drawable.s_user);
         selects.put(R.id.community,R.drawable.s_users);
         selects.put(R.id.api,R.drawable.s_douban);
-
     }
 
     //绑定主视图中五类视图
@@ -131,7 +128,6 @@ public class MainActivity extends FragmentActivity {
     }
     //底部按键点击事件
     private void buttomLis() {
-
         View.OnClickListener tabClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,7 +141,6 @@ public class MainActivity extends FragmentActivity {
                             isLogin = true; //已登录
                         }
                     }
-
                     if(isLogin){
                         changeSelect(currentId,v.getId());//图片更新操作
                         changeFragment(currentId,v.getId());//fragment的切换

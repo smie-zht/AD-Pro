@@ -4,31 +4,6 @@
     android:background="#E7F0EE"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--<ImageView-->
-        <!--android:id="@+id/login_bg_image4"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:scaleType="centerCrop"-->
-        <!--android:src="@drawable/login_bg4" />-->
-
-    <!--<ImageView-->
-        <!--android:id="@+id/login_bg_image3"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:scaleType="centerCrop"-->
-        <!--android:src="@drawable/login_bg3" />-->
-    <!--<ImageView-->
-        <!--android:id="@+id/login_bg_image2"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:scaleType="centerCrop"-->
-        <!--android:src="@drawable/login_bg2" />-->
-    <!--<ImageView-->
-        <!--android:id="@+id/login_bg_image1"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:scaleType="centerCrop"-->
-        <!--android:src="@drawable/login_bg1" />-->
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"

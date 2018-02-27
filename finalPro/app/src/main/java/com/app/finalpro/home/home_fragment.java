@@ -253,11 +253,11 @@ public class home_fragment extends Fragment {
     }
 
     public  void button(){
-        searchLis();
-        slide();
-        recLis();
-        typeLis();
-        itemLis();
+        searchLis();//搜索栏监听事件
+        slide();   //滑动伸缩推荐栏
+        recLis();  //推荐图书点击事件
+        typeLis(); //分类栏点击事件
+        itemLis(); //分类图书点击事件
     }
     //RecyclerView 子项点击事件
     private void itemLis() {

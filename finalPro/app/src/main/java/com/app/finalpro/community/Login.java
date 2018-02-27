@@ -48,7 +48,7 @@ public class Login extends AppCompatActivity {
     public TextView forget;//忘记密码
     public EditText user;//用户名
     public EditText password;//密码
-    private String s;
+    private String s;   //SQL获取用户名
     private TextView textView;
     private String sql;//输入登录信息之后实现查询的显示！
     private Toast toast;

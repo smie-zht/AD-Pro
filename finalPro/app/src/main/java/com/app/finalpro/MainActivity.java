@@ -32,6 +32,7 @@ public class MainActivity extends FragmentActivity {
     private user_fragment userFragment;
     private com_fragment comFragment;
     private douban_fragment doubFragment;
+    private Bundle savedInstanceState;
 
     private int currentId = R.id.home;// 当前选中id,默认是主页
     private Map<Integer,Integer> normals;   //正常图片保存
@@ -58,6 +59,7 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.savedInstanceState = savedInstanceState;
         getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
         setContentView(R.layout.activity_main);
         init();   //控件绑定 + 初始数据

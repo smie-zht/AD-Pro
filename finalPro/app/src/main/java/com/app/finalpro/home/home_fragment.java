@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -162,6 +163,7 @@ public class home_fragment extends Fragment {
                         if(loadData())
                             thread.interrupt();
                         break;
+
                 }
             }
         };
@@ -325,6 +327,7 @@ public class home_fragment extends Fragment {
                 }
             };
             touch.setObject(guide);
+            touch.setHandler();
             types[i].setOnTouchListener(touch);
 //            types[i].setOnClickListener(new View.OnClickListener() {
 //                @Override
@@ -374,6 +377,7 @@ public class home_fragment extends Fragment {
                 }
             };
             recs_touch[i].setObject(guide);
+            recs_touch[i].setHandler();
             recs[i].setOnTouchListener(recs_touch[i]);
         }
     }
@@ -388,6 +392,7 @@ public class home_fragment extends Fragment {
             }
         };
         head_touch.setObject(guide);
+        head_touch.setHandler();
         head.setOnTouchListener(head_touch);
         search.setOnTouchListener(head_touch);
         guide.setOnTouchListener(head_touch);

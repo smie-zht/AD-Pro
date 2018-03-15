@@ -1,7 +1,10 @@
 package com.app.finalpro.home;
 
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -21,11 +24,13 @@ abstract class imgtestTouchListener implements View.OnTouchListener {
 
     private int x=0;   //用于记录坐标
     private int y=0;
+    private int initHeight;
     public LinearLayout head;    //要操作的对象
     public Context main;
     public  String left;    //需要的判断参数
     public String right;
-    Date dt= new Date();
+    private Handler handler;
+    Date dt;
     Long time;
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -34,26 +39,27 @@ abstract class imgtestTouchListener implements View.OnTouchListener {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 //手指按下的时候：初始化 x,y 值
-                x=(int) event.getX();
-                y=(int) event.getY();
+                x=(int) event.getRawX();
+                y=(int) event.getRawY();
+                dt = new Date(System.currentTimeMillis());
+                ConstraintLayout.LayoutParams linearParams
+                        =(ConstraintLayout.LayoutParams) head.getLayoutParams(); //取对象当前的布局参数
+                initHeight = linearParams.height;
                 time = dt.getTime();
                 break;
             case MotionEvent.ACTION_MOVE:
                 //滑动触发事件：根据最新坐标，修改对象
-                Log.v("time",String.valueOf(dt.getTime()-time));
- //               if((dt.getTime()-time)%500==0){
-
- //               }
-                if(abs((int)event.getY()-y)%5==0&&abs((int)event.getY()-y)<430){
-                    moveEvent((int)event.getX(),(int)event.getY());
+                Log.v("滑动",String.valueOf(abs((int)event.getRawY()-y)));
+                if(abs((int)event.getRawY()-y)%1==0&&abs((int)event.getRawY()-y)<430){
+                    moveEvent((int)event.getRawX(),(int)event.getRawY());
                 }
                 break;
             case MotionEvent.ACTION_UP:
                 //松开触发事假：根据最终坐标，修改对象
-                int upx=(int) event.getX();
-                int upy=(int) event.getY();
+                int upx=(int) event.getRawX();
+                int upy=(int) event.getRawY();
                 String result=drawTouch(upx,upy);
-                Log.v("result",String.valueOf(event.getX()));
+                Log.v("result",String.valueOf(upy));
                 break;
         }
         return true;
@@ -63,10 +69,36 @@ abstract class imgtestTouchListener implements View.OnTouchListener {
         head = (LinearLayout)v;
     }
 
-    public void setToggle(Context main,String left,String right){
-        this.main = main;
-        this.left = left;
-        this.right = right;
+    public void setHandler(){
+        handler = new Handler(){
+            @Override
+            public void handleMessage(Message msg){
+                super.handleMessage(msg);
+                ConstraintLayout.LayoutParams linearParams
+                        =(ConstraintLayout.LayoutParams) head.getLayoutParams(); //取对象当前的布局参数
+                switch (msg.what){
+                    case 101:  //延时伸展
+                        if(linearParams.height>=410){
+                            linearParams.height=430;
+                            head.setLayoutParams(linearParams);
+                        }else{
+                            linearParams.height+=20;
+                            head.setLayoutParams(linearParams);
+                            handler.sendEmptyMessageDelayed(101,15);
+                        }break;
+                    case 102:  //延时收缩
+                        if(linearParams.height<=20){
+                            linearParams.height=0;
+                            head.setLayoutParams(linearParams);
+                            head.setVisibility(View.GONE);
+                        }else{
+                            linearParams.height-=20;
+                            head.setLayoutParams(linearParams);
+                            handler.sendEmptyMessageDelayed(102,15);
+                        }break;
+                }
+            }
+        };
     }
 
     //松开触发事假：根据最终坐标，修改对象
@@ -75,65 +107,48 @@ abstract class imgtestTouchListener implements View.OnTouchListener {
         //水平滑动
         if(upx-x>400){
             str="向右滑动";
-//            Intent intent = new Intent(right);
-//            main.startActivity(intent);
         }else if(x-upx>400){
             str="向左滑动";
-//            Intent intent = new Intent();
-//            intent.setAction(left);
-//            main.startActivity(intent);
-        }else if(upy-y>100){
+        }else if((upy-y>200)||((y-upy<200)&&(y-upy>10))){
             str="向下滑动";
-            //改变图片
-            //img_test.setImageResource(R.drawable.icon_down);
-
             ConstraintLayout.LayoutParams linearParams
                     =(ConstraintLayout.LayoutParams) head.getLayoutParams(); //取对象当前的布局参数
-//            Log.v("is 0??",String.valueOf(linearParams.height));
-//            if(linearParams.height == 0){
-//                head.setVisibility(View.VISIBLE);
-//                int frame = 0;
-//                while (true){
-//                    if(frame==25) break;
-//                    if((dt.getTime()-time)%40==0){
-//                        linearParams.height += 18;
-//                        head.setLayoutParams(linearParams); //使设置好的布局参数应用到控件
-//                        frame++;
-//                        Log.v("height",String.valueOf(linearParams.height));
-//                    }
-//                }
-                linearParams.height = 430;
-                head.setVisibility(View.VISIBLE);
-                head.setLayoutParams(linearParams); //使设置好的布局参数应用到控件
-            //}
-            Log.v("收缩","展开");
-        }else if(y-upy>100){
-            str="向上滑动";
-            //改变图片
-            //img_test.setImageResource(R.drawable.icon_up);
-
-            ConstraintLayout.LayoutParams linearParams
-                    =(ConstraintLayout.LayoutParams) head.getLayoutParams(); //取对象当前的布局参数
-            Log.v("is Max??",String.valueOf(linearParams.height));
-            //if(linearParams.height > 400){
-//                int frame = 0;
+            head.setVisibility(View.VISIBLE);
+            dt = new Date(System.currentTimeMillis());
+            time = dt.getTime();
+            Log.v("滑动时间",String.valueOf(time));
+//            while(linearParams.height<420){
+//                Log.v("滑动-缓慢展开",String.valueOf(linearParams.height));
+//                dt = new Date(System.currentTimeMillis());
+//                time = dt.getTime();
+//                Log.v("滑动-缓慢展开时间",String.valueOf(dt.getTime()));
+//                linearParams.height+=1;
+//                head.setLayoutParams(linearParams);
+//            }
+//                dt = new Date(System.currentTimeMillis());
+//                time = dt.getTime();
+//                Log.v("滑动时间",String.valueOf(time));
 //                linearParams.height = 430;
-//                while (true){
-//
-//                    Delayed
-//                    if(frame==25) break;
-//                    if((dt.getTime()-time)%4==0){
-//                        linearParams.height -= 18;
-//                        head.setLayoutParams(linearParams); //使设置好的布局参数应用到控件
-//                        Log.v("height1",String.valueOf(linearParams.height));
-//                        frame++;
-//                    }
-//                    Log.v("height",String.valueOf(linearParams.height));
+//                head.setLayoutParams(linearParams); //使设置好的布局参数应用到控件
+            handler.obtainMessage(101).sendToTarget();
+            Log.v("收缩","展开");
+        }else if((y-upy>200)||((upy-y<200)&&(upy-y>10))){
+            str="向上滑动";
+            ConstraintLayout.LayoutParams linearParams
+                    =(ConstraintLayout.LayoutParams) head.getLayoutParams(); //取对象当前的布局参数
+//                while(linearParams.height>10){
+//                    Log.v("滑动-缓慢收缩",String.valueOf(linearParams.height));
+//                    dt = new Date(System.currentTimeMillis());
+//                    time = dt.getTime();
+//                    Log.v("滑动-缓慢收缩-时间",String.valueOf(time));
+//                    linearParams.height-=1;
+//                    head.setLayoutParams(linearParams);
 //                }
-                linearParams.height = 0;
-                head.setLayoutParams(linearParams); //使设置好的布局参数应用到控件
-                head.setVisibility(View.GONE);
-            //}
+
+//            linearParams.height = 0;
+//            head.setLayoutParams(linearParams); //使设置好的布局参数应用到控件
+//            head.setVisibility(View.GONE);
+            handler.obtainMessage(102).sendToTarget();
             Log.v("收缩","隐藏");
         }
         else{
@@ -148,22 +163,19 @@ abstract class imgtestTouchListener implements View.OnTouchListener {
         if(head!=null){
             ConstraintLayout.LayoutParams linearParams = (ConstraintLayout.LayoutParams)head.getLayoutParams();
             int up = upy - y;
-            if(up>30){
+            if(up>20&&initHeight<400){      //up + 表示：下滑
                 linearParams.height = (up);
                 head.setLayoutParams(linearParams); //使设置好的布局参数应用到控件
                 head.setVisibility(View.VISIBLE);
             }
-            else{linearParams.height = (430 + up);}
+            if(up<0&&initHeight>400){linearParams.height = (430 + up);}   //up- 表示：下滑
             if(linearParams.height<10)   linearParams.height = 0;
-            if(linearParams.height>500 ) linearParams.height = 430;
+            if(linearParams.height>450 ) linearParams.height = 430;
             head.setLayoutParams(linearParams); //使设置好的布局参数应用到控件
         }
     }
 
-
     public abstract void click();
-
-
 
 
 }

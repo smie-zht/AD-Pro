@@ -155,8 +155,6 @@ public class User_infomation extends AppCompatActivity {
                 handler.sendEmptyMessage(1);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
     };

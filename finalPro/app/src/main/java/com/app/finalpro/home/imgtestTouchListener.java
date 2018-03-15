@@ -175,6 +175,5 @@ abstract class imgtestTouchListener implements View.OnTouchListener {
     }
 
     public abstract void click();
-
-
+    
 }

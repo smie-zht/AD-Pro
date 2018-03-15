@@ -32,6 +32,7 @@ import com.app.finalpro.community.Login;
 import com.app.finalpro.home.Adapter.bookAdapter;
 import com.app.finalpro.R;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -168,7 +169,12 @@ public class home_fragment extends Fragment {
             }
         };
     }
-    //type:null 表示初始化,其他表示type
+
+    /**
+     * 针对不同情况的数据库连接
+     * @param type  null 表示初始化,其他表示type
+     */
+
     public void cnet(String type){
         thread = new Thread(new Runnable(){
             @Override

@@ -55,7 +55,6 @@ public class ChangeBitmap {
         float widthScale = ((float) newWidth) / rawWidth;
         Matrix matrix = new Matrix();
         matrix.postScale(widthScale, heightScale);
-
         Bitmap newBitmap = Bitmap.createBitmap(rawBitmap, 0, 0, rawWidth, rawHeight, matrix, true);
         return newBitmap;
     }

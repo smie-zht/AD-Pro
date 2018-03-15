@@ -144,7 +144,6 @@ abstract class imgtestTouchListener implements View.OnTouchListener {
 //                    linearParams.height-=1;
 //                    head.setLayoutParams(linearParams);
 //                }
-
 //            linearParams.height = 0;
 //            head.setLayoutParams(linearParams); //使设置好的布局参数应用到控件
 //            head.setVisibility(View.GONE);

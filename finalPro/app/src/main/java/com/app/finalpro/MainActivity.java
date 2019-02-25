@@ -235,10 +235,7 @@ public class MainActivity extends FragmentActivity {
             transaction.hide(doubFragment);
     }
     private void killFragments(FragmentTransaction transaction,int killId){
-//        if (killId==R.id.home){
-//            transaction.remove(homeFragment);
-//            homeFragment = null;
-//        }
+
         if (killId == R.id.user){
             transaction.remove(userFragment);
             userFragment = null;
@@ -248,10 +245,6 @@ public class MainActivity extends FragmentActivity {
             comFragment = null;
         }
 
-//        else if (killId==R.id.api){
-//            transaction.remove(doubFragment);
-//            doubFragment = null;
-//        }
 
         System.gc();
     }

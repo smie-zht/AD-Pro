@@ -27,6 +27,9 @@ import java.util.Map;
 
 
 public class MainActivity extends FragmentActivity {
+    /*我想把这个项目-改装成毕业设计项目*/
+    //那我该从哪里改起呢？
+
     //要切换显示的四个Fragment
     private home_fragment homeFragment;
     private user_fragment userFragment;

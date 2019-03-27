@@ -8,3 +8,6 @@ this a android project for final,enjoy it!
 7.冲突-修改不一致所致
 8.变基-无参数，到底是怎么变的
 9.先把这次变基同步到主分支上。
+10.
+11.
+12.
